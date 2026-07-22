@@ -62,6 +62,13 @@ a{text-decoration:none;color:inherit;}
   background-position:center;
   overflow:hidden;
 }
+.hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 .hero-overlay{
   position:absolute;
   inset:0;
@@ -375,6 +382,9 @@ a{text-decoration:none;color:inherit;}
 </header>
 
 <section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="ADOBES~2.MP4" type="video/mp4">
+  </video>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <span class="badge">INAZOU OFFICE SERVICE</span>
