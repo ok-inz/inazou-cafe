@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+  <html lang="ja">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INAZOU CAFE</title>
+  <style>
+  :root{
+    --dark:#1c1512;
+  --dark2:#2a211c;
+  --cream:#f7f2ea;
+      --text-dark:#2b2118;
+  --text-gray:#8a8078;
+  --accent:#e0562f;
+      --card-bg:#ffffff;
+      --border-soft:#eee6da;
+    }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--cream);
+  color:var(--text-dark);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+
+/* Header */
+.topbar{
+    position:absolute;
+  top:0;left:0;right:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 20px;
+  z-index:10;
+}
+.topbar .logo{
+  color:#fff;
+    font-weight:700;
+  font-size:15px;
+  letter-spacing:0.5px;
+}
+.topbar .menu-btn{
+    background:none;
+  border:none;
+  color:#fff;
+    font-size:20px;
+  cursor:pointer;
+  line-height:1;
+}
+
+/* Hero */
+.hero{
+    position:relative;
+  min-height:560px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background-image:url('https://images.unsplash.com/photo-1761695939616-1c03087c1ce4?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;
+  background-position:center;
+  overflow:hidden;
+}
+.hero-overlay{
+    position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(10,7,5,0.55) 0%, rgba(10,7,5,0.25) 30%, rgba(10,7,5,0.85) 85%, rgba(8,5,4,0.97) 100%);
+}
+.hero-content{
+    position:relative;
+  z-index:2;
+  padding:0 22px 34px;
+  color:#fff;
+  }
+.badge{
+    display:inline-block;
+  border:1px solid rgba(255,255,255,0.5);
+  background:rgba(0,0,0,0.25);
+  border-radius:20px;
+  padding:5px 14px;
+  font-size:11px;
+  letter-spacing:1px;
+  margin-bottom:14px;
+}
+.hero-content h1{
+    font-size:38px;
+  font-weight:800;
+  margin-bottom:14px;
+  letter-spacing:0.5px;
+}
+.hero-content p{
+    font-size:13.5px;
+  line-height:1.9;
+  color:rgba(255,255,255,0.88);
+  margin-bottom:18px;
+  font-weight:400;
+}
+.menu-link{
+    display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:14px;
+  font-weight:600;
+  color:#fff;
+  }
+.menu-link .arrow{font-size:16px;}
+.scroll-indicator{
+    position:relative;
+  z-index:2;
+  text-align:center;
+  color:rgba(255,255,255,0.75);
+  font-size:18px;
+  padding-bottom:14px;
+}
+
+/* Main content */
+.content{
+    max-width:1080px;
+  margin:0 auto;
+  padding:38px 20px 10px;
+}
+.section-title{
+    text-align:center;
+  font-size:21px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:var(--text-dark);
+}
+.section-sub{
+    text-align:center;
+  font-size:12.5px;
+  color:var(--text-gray);
+  margin-bottom:28px;
+}
+
+.grid{
+    display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+}
+.col-left{
+    display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.card{
+    background:var(--card-bg);
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 4px 18px rgba(60,45,30,0.07);
+}
+
+.menu-card h3{
+    display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:1px;
+  padding-bottom:12px;
+  margin-bottom:8px;
+  border-bottom:1px solid var(--border-soft);
+}
+.menu-card h3 .icon{font-size:16px;}
+
+.item-list{list-style:none;}
+.item-list li{
+    display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border-soft);
+}
+.item-list li:last-child{border-bottom:none;padding-bottom:0;}
+.item-thumb{
+    width:46px;
+  height:46px;
+  border-radius:12px;
+  background:#f4efe4;
+    display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  flex-shrink:0;
+  overflow:hidden;
+}
+.item-thumb img{width:100%;height:100%;object-fit:cover;}
+.item-info{flex:1;min-width:0;}
+.item-name{font-size:13.5px;font-weight:600;color:var(--text-dark);}
+.item-qty{font-size:11px;color:var(--text-gray);margin-top:2px;}
+.item-price{
+    font-size:14.5px;
+  font-weight:700;
+  color:var(--text-dark);
+  white-space:nowrap;
+}
+.item-price span{font-size:11px;font-weight:400;color:var(--text-gray);margin-left:1px;}
+
+/* Payment card */
+.payment-card{
+    background:var(--card-bg);
+}
+.pay-label{font-size:12px;color:var(--text-gray);margin-bottom:6px;}
+.kotora-row{
+    display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+.kotora-row h3{font-size:19px;font-weight:800;}
+.kotora-logo{
+    width:38px;
+  height:38px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#f7931e,#e0562f);
+      color:#fff;
+      font-size:10px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1.1;
+}
+.pay-sub{font-size:11.5px;color:var(--text-gray);margin-bottom:4px;}
+.phone-number{
+    font-size:22px;
+  font-weight:800;
+  letter-spacing:0.5px;
+  margin-bottom:16px;
+}
+.copy-btn{
+    width:100%;
+  background:var(--dark);
+  color:#fff;
+    border:none;
+  border-radius:10px;
+  padding:12px;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+  margin-bottom:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:opacity .2s;
+}
+.copy-btn:active{opacity:0.8;}
+.steps h4{
+    font-size:13px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.steps ol{
+    list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:18px;
+}
+.steps li{
+    font-size:12.5px;
+  color:var(--text-dark);
+  display:flex;
+  gap:8px;
+}
+.steps li .num{
+    flex-shrink:0;
+  color:var(--accent);
+  font-weight:700;
+}
+.thanks{
+    font-size:11.5px;
+  color:var(--text-gray);
+  line-height:1.8;
+  border-top:1px solid var(--border-soft);
+  padding-top:14px;
+  text-align:center;
+}
+
+/* Footer */
+.footer{
+    background:var(--dark);
+  color:#fff;
+    margin-top:40px;
+  padding:36px 20px 22px;
+}
+.footer-inner{
+    max-width:1080px;
+  margin:0 auto;
+}
+.footer-top{
+    display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-bottom:20px;
+}
+.footer-brand h2{
+    font-size:19px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+.footer-brand p{
+    font-size:11.5px;
+  color:rgba(255,255,255,0.55);
+  line-height:1.6;
+}
+.footer-hours{text-align:right;}
+.footer-hours .open{
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.footer-hours .closed{
+  font-size:11.5px;
+  color:rgba(255,255,255,0.55);
+}
+.footer-card{
+    background:var(--dark2);
+  border-radius:14px;
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+}
+.footer-card .msg .line1{font-size:14px;font-weight:700;margin-bottom:3px;}
+.footer-card .msg .line2{font-size:11px;color:rgba(255,255,255,0.5);}
+.footer-card .icon{
+  width:34px;height:34px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+}
+.copyright{
+    text-align:center;
+  font-size:11px;
+  color:rgba(255,255,255,0.4);
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:16px;
+}
+
+/* Toast */
+.toast{
+    position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--dark);
+  color:#fff;
+    padding:10px 20px;
+  border-radius:8px;
+  font-size:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s, transform .25s;
+  z-index:100;
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+@media (min-width:820px){
+  .hero{min-height:640px;}
+  .hero-content{padding:0 60px 44px;max-width:640px;}
+  .hero-content h1{font-size:52px;}
+      .hero-content p{font-size:15px;}
+      .content{padding:60px 40px 10px;}
+  .section-title{font-size:26px;}
+      .grid{grid-template-columns:1.3fr 1fr;align-items:start;}
+  .footer-inner{padding:0 20px;}
+}
+</style>
+  </head>
+  <body>
+  <header class="topbar">
+    <div class="logo">INAZOU CAFE</div>
+    <button class="menu-btn" aria-label="menu">&#9776;</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="badge">INAZOU OFFICE SERVICE</span>
+      <h1>INAZOU CAFE</h1>
+      <p>
+        オフィスで気軽に楽しめる<br>
+        ドリンクとフードをご用意しています。<br>
+        お支払いは、手数料無料の「ことら送金」で<br>
+        お願いします。
+      </p>
+      <a href="#menu" class="menu-link">MENUを見る <span class="arrow">&rsaquo;</span></a>
+    </div>
+    <div class="scroll-indicator">&#8964;</div>
+  </section>
+
+  <main class="content" id="menu">
+    <h2 class="section-title">ほっと一息、いい時間を。</h2>
+    <p class="section-sub">ドリンクとフードで、毎日をちょっと豊かに。</p>
+
+    <div class="grid">
+      <div class="col-left">
+        <div class="card menu-card">
+          <h3><span class="icon">&#127864;</span>DRINK</h3>
+          <ul class="item-list">
+            <li>
+              <div class="item-thumb">&#127819;</div>
+              <div class="item-info">
+                <div class="item-name">キレートレモン</div>
+                <div class="item-qty">1本</div>
+              </div>
+              <div class="item-price">95円<span>/本</span></div>
+            </li>
+            <li>
+              <div class="item-thumb">&#127817;</div>
+              <div class="item-info">
+                <div class="item-name">カゴメトマトジュース</div>
+                <div class="item-qty">1本</div>
+              </div>
+              <div class="item-price">104円<span>/本</span></div>
+            </li>
+            <li>
+              <div class="item-thumb">&#129381;</div>
+              <div class="item-info">
+                <div class="item-name">SAVAS</div>
+                <div class="item-qty">1本</div>
+              </div>
+              <div class="item-price">125円<span>/本</span></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card menu-card">
+          <h3><span class="icon">&#127860;</span>FOOD</h3>
+          <ul class="item-list">
+            <li>
+              <div class="item-thumb">&#127843;</div>
+              <div class="item-info">
+                <div class="item-name">1本満足バー</div>
+                <div class="item-qty">1本</div>
+              </div>
+              <div class="item-price">116円<span>/本</span></div>
+            </li>
+            <li>
+              <div class="item-thumb">&#127837;</div>
+              <div class="item-info">
+                <div class="item-name">クリーム玄米ブラン</div>
+                <div class="item-qty">1本</div>
+              </div>
+              <div class="item-price">118円<span>/本</span></div>
+            </li>
+            <li>
+              <div class="item-thumb">&#127860;</div>
+              <div class="item-info">
+                <div class="item-name">お味噌汁</div>
+                <div class="item-qty">1本</div>
+              </div>
+              <div class="item-price">21円<span>/本</span></div>
+            </li>
+            <li>
+              <div class="item-thumb">&#127858;</div>
+              <div class="item-info">
+                <div class="item-name">スープ</div>
+                <div class="item-qty">1本</div>
+              </div>
+              <div class="item-price">88円<span>/本</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-right">
+        <div class="card payment-card">
+          <p class="pay-label">お支払いは</p>
+          <div class="kotora-row">
+            <h3>ことら送金</h3>
+            <div class="kotora-logo">こと<br>ら</div>
+          </div>
+          <p class="pay-sub">送金先電話番号</p>
+          <p class="phone-number" id="phoneNumber">090-8463-0980</p>
+          <button class="copy-btn" id="copyBtn">&#128203; 番号をコピー</button>
+          <div class="steps">
+            <h4>ことら送金の手順</h4>
+            <ol>
+              <li><span class="num">&#9312;</span>ことらアプリを開く</li>
+              <li><span class="num">&#9313;</span>「ことら送金」を選択</li>
+              <li><span class="num">&#9314;</span>電話番号を入力</li>
+              <li><span class="num">&#9315;</span>金額を入力して送金</li>
+              <li><span class="num">&#9316;</span>内容を確認して完了</li>
+            </ol>
+          </div>
+          <p class="thanks">
+            ご利用ありがとうございます。<br>
+            心を込めて、お一人お一人にサービスしております。
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h2>INAZOU CAFE</h2>
+          <p>Office Convenience Store</p>
+        <p>Since 2026</p>
+      </div>
+      <div class="footer-hours">
+        <p class="open">OPEN 平日 9:00 - 17:00</p>
+        <p class="closed">土日祝日は休みです。</p>
+        </div>
+    </div>
+      <div class="footer-card">
+      <div class="msg">
+          <div class="line1">よい一日を。</div>
+          <div class="line2">INAZOU CAFEより</div>
+        </div>
+        <div class="icon">&#10024;</div>
+      </div>
+      <p class="copyright">&copy; INAZOU CAFE</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">番号をコピーしました</div>
+
+  <script>
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var phone = document.getElementById('phoneNumber').textContent.trim();
+  var showToast = function () {
+    var toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(function () { toast.classList.remove('show'); }, 2000);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(phone).then(showToast).catch(function () {
+            fallbackCopy(phone);
+      showToast();
+    });
+  } else {
+    fallbackCopy(phone);
+    showToast();
+  }
+  function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+});
+</script>
+  </body>
+  </html>
+  
